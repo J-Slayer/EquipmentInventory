@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  /* Core palette */
+  --color-ink: #1B1A17;
+  --color-brand: #C00000;
+  --color-brand-hover: #A30000;
+  --color-surface: #EDEBE6;
+  --color-card: #FFFFFF;
+  --color-surface-alt: #F7F5F1;
+  --color-modal-strip: #FBFAF7;
+  --color-border: #E3E0D9;
+  --color-border-strong: #D5D0C7;
+  --color-hairline: #F0EEE9;
+  --color-muted: #6B6760;
+  --color-faint: #9C968B;
+  --color-body-alt: #3D3A35;
+  --color-topbar-border: #E0DCD3;
+  --color-sticker-salmon: #E0866B;
+  --color-sticker-gray: #C9C5BD;
+
+  /* Equipment status */
+  --color-available-text: #1B7A4B;
+  --color-available-bg: #E4F2EA;
+  --color-available-dot: #2E9E63;
+  --color-assigned-text: #295A99;
+  --color-assigned-bg: #E7EEF8;
+  --color-assigned-dot: #3B72C0;
+  --color-repair-text: #94560F;
+  --color-repair-bg: #F7ECD9;
+  --color-repair-dot: #C77F1B;
+  --color-retired-text: #6B6760;
+  --color-retired-bg: #ECEAE4;
+  --color-retired-dot: #9C968B;
+
+  /* Contract-only status */
+  --color-expiring-text: #94560F;
+  --color-expiring-bg: #F7ECD9;
+  --color-expiring-dot: #C77F1B;
+  --color-expired-text: #A82018;
+  --color-expired-bg: #FBEAE8;
+  --color-expired-dot: #D13B30;
+  --color-noend-text: #6B6760;
+  --color-noend-bg: #ECEAE4;
+  --color-noend-dot: #9C968B;
+
+  /* Typography */
+  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  *:focus-visible {
+    outline: 2px solid #C00000;
+    outline-offset: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #D5D0C7;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #9C968B;
+  }
+}
