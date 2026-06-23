@@ -9,6 +9,7 @@ export async function createContractAction(data: {
   provider?: string
   account_number?: string
   monthly_cost: number
+  data_gb?: number
   start_date?: string
   renewal_date?: string
   holder?: string
@@ -31,6 +32,7 @@ export async function updateContractAction(
     provider: string
     account_number: string
     monthly_cost: number
+    data_gb: number | null
     start_date: string
     renewal_date: string | null
     holder: string

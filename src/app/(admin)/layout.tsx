@@ -9,7 +9,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (!user) redirect('/login')
+  if (!user) redirect('/auth/login')
 
   // Count contracts needing attention for the nav badge
   const { data: attentionContracts } = await supabase

@@ -15,6 +15,10 @@ export interface Person {
   job_title: string | null
   department: string | null
   email: string | null
+  employee_no: string | null
+  id_number: string | null
+  employment_status: 'Active' | 'Former'
+  left_date: string | null
   created_at: string
 }
 
@@ -31,7 +35,22 @@ export interface Equipment {
   purchase_date: string | null
   condition: string | null
   notes: string | null
+  register_no: string | null
+  make: string | null
+  model: string | null
+  value_incl_vat: number | null
   created_at: string
+}
+
+export interface LaptopRegisterItem {
+  register_no: string
+  id: string
+  name: string
+  type: string | null
+  serial: string | null
+  status: EquipmentStatus
+  asset_tag: string
+  holder: string | null
 }
 
 export interface EquipmentWithAssignee extends Equipment {
@@ -57,6 +76,7 @@ export interface Contract {
   provider: string | null
   account_number: string | null
   monthly_cost: number
+  data_gb: number | null
   start_date: string | null
   renewal_date: string | null
   holder: string | null
@@ -82,12 +102,48 @@ export interface PublicAsset {
   assignee_name: string | null
 }
 
+export interface PasswordSystem {
+  id: string
+  key: string
+  name: string
+  subtitle: string | null
+  sort_order: number
+}
+
+export interface LoginRow {
+  id: string
+  system_id: string
+  first_name: string
+  surname: string | null
+  username: string | null
+  updated_at: string
+}
+
+export interface SharedAccountRow {
+  id: string
+  service: string
+  category: string | null
+  username: string | null
+  url: string | null
+  owner: string | null
+  notes: string | null
+  updated_at: string
+}
+
 export interface Settings {
   id: 1
   company_name: string
   asset_tag_prefix: string
   show_property_of: boolean
 }
+
+type Relationships = {
+  foreignKeyName: string
+  columns: string[]
+  isOneToOne?: boolean
+  referencedRelation: string
+  referencedColumns: string[]
+}[]
 
 export type Database = {
   public: {
@@ -96,34 +152,41 @@ export type Database = {
         Row: Person
         Insert: Omit<Person, 'id' | 'created_at'>
         Update: Partial<Omit<Person, 'id' | 'created_at'>>
+        Relationships: Relationships
       }
       equipment: {
         Row: Equipment
         Insert: Omit<Equipment, 'id' | 'created_at'>
         Update: Partial<Omit<Equipment, 'id' | 'created_at'>>
+        Relationships: Relationships
       }
       assignment_history: {
         Row: AssignmentHistory
-        Insert: Omit<AssignmentHistory, 'id' | 'created_at'>
-        Update: Partial<Omit<AssignmentHistory, 'id' | 'created_at'>>
+        Insert: Omit<AssignmentHistory, 'id' | 'created_at' | 'person'>
+        Update: Partial<Omit<AssignmentHistory, 'id' | 'created_at' | 'person'>>
+        Relationships: Relationships
       }
       contracts: {
         Row: Contract
         Insert: Omit<Contract, 'id' | 'created_at'>
         Update: Partial<Omit<Contract, 'id' | 'created_at'>>
+        Relationships: Relationships
       }
       settings: {
         Row: Settings
         Insert: Partial<Settings>
         Update: Partial<Settings>
+        Relationships: Relationships
       }
     }
     Views: {
       public_asset: {
         Row: PublicAsset
+        Relationships: Relationships
       }
       contracts_with_status: {
         Row: ContractWithStatus
+        Relationships: Relationships
       }
     }
     Functions: {
@@ -132,5 +195,10 @@ export type Database = {
         Returns: ContractStatus
       }
     }
+    Enums: {
+      equipment_status: EquipmentStatus
+      history_event: HistoryEvent
+    }
+    CompositeTypes: Record<string, never>
   }
 }

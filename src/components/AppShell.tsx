@@ -16,8 +16,10 @@ export function AppShell({ children, contractsBadge = 0, adminInitials = 'PV' }:
 
   const navItems = [
     { label: 'Equipment', href: '/equipment' },
+    { label: 'Register', href: '/register' },
     { label: 'People', href: '/people' },
     { label: 'Contracts', href: '/contracts', badge: contractsBadge > 0 ? contractsBadge : undefined },
+    { label: 'Passwords', href: '/passwords' },
   ]
 
   return (

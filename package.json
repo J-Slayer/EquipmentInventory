@@ -15,7 +15,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/J-Slayer/EquipmentInventory/issues"
   },
@@ -31,7 +30,7 @@
     "qrcode": "^1.5.4",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "typescript": "^6.0.3"
+    "typescript": "~5.7.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.1",

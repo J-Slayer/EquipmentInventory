@@ -10,16 +10,24 @@ export async function createEquipmentAction(data: {
   type?: string
   serial?: string
   status: EquipmentStatus
+  make?: string
+  model?: string
+  value_incl_vat?: number
   location?: string
   purchase_date?: string
   condition?: string
   notes?: string
 }) {
   const supabase = await createClient()
-  const { error } = await supabase.from('equipment').insert(data)
+  const { data: created, error } = await supabase
+    .from('equipment')
+    .insert(data as any)
+    .select('register_no')
+    .single()
   if (error) return { error: error.message }
   revalidatePath('/equipment')
-  return { success: true }
+  revalidatePath('/register')
+  return { success: true, register_no: (created as any)?.register_no as string | null }
 }
 
 export async function updateEquipmentAction(
@@ -29,6 +37,9 @@ export async function updateEquipmentAction(
     type: string
     serial: string
     status: EquipmentStatus
+    make: string
+    model: string
+    value_incl_vat: number
     location: string
     purchase_date: string
     condition: string
@@ -39,6 +50,7 @@ export async function updateEquipmentAction(
   const { error } = await supabase.from('equipment').update(data).eq('id', id)
   if (error) return { error: error.message }
   revalidatePath('/equipment')
+  revalidatePath('/register')
   revalidatePath(`/equipment/${id}`)
   return { success: true }
 }
@@ -48,6 +60,7 @@ export async function deleteEquipmentAction(id: string) {
   const { error } = await supabase.from('equipment').delete().eq('id', id)
   if (error) return { error: error.message }
   revalidatePath('/equipment')
+  revalidatePath('/register')
   return { success: true }
 }
 

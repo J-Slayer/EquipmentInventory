@@ -1,9 +1,9 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-const PUBLIC_PATHS = ['/login', '/a/', '/scan']
+const PUBLIC_PATHS = ['/auth/login', '/a/', '/scan']
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request })
 
   const supabase = createServerClient(
@@ -36,11 +36,11 @@ export async function middleware(request: NextRequest) {
 
   if (!user && !isPublic) {
     const url = request.nextUrl.clone()
-    url.pathname = '/login'
+    url.pathname = '/auth/login'
     return NextResponse.redirect(url)
   }
 
-  if (user && pathname === '/login') {
+  if (user && pathname === '/auth/login') {
     const url = request.nextUrl.clone()
     url.pathname = '/equipment'
     return NextResponse.redirect(url)
