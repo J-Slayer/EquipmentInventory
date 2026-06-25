@@ -7,9 +7,8 @@ import { Button } from '@/components/ui/Button'
 import type { Equipment, EquipmentStatus } from '@/lib/types'
 
 const TYPES = [
-  'Laptop', 'Desktop', 'Tablet', 'Rugged tablet', 'Two-way radio',
-  'Survey instrument', 'Survey drone', 'Plotter', 'Instrument',
-  'Mobile', 'Other',
+  'Laptop', 'Desktop', 'Tablet', 'Monitor', 'Printer',
+  'Mobile', 'Wi-Fi router', 'Plotter', 'Other',
 ]
 
 const STATUSES: EquipmentStatus[] = ['Available', 'Assigned', 'In repair', 'Retired']
@@ -67,11 +66,11 @@ export function EquipmentModal({ equipment: eq, onClose }: Props) {
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       <div
-        className="w-full max-w-[520px] bg-white rounded-[13px] overflow-hidden"
+        className="w-full max-w-[520px] bg-white rounded-[13px] overflow-hidden max-h-[90vh] flex flex-col"
         style={{ boxShadow: '0 24px 60px rgba(0,0,0,.35)' }}
       >
         {/* Header */}
-        <div className="flex items-start justify-between px-6 pt-6 pb-5">
+        <div className="flex items-start justify-between px-6 pt-6 pb-5 shrink-0">
           <div>
             <h2 className="text-[18px] font-semibold" style={{ color: '#1B1A17' }}>
               {isEdit ? 'Edit equipment' : 'Add equipment'}
@@ -91,8 +90,8 @@ export function EquipmentModal({ equipment: eq, onClose }: Props) {
         </div>
 
         {/* Form body */}
-        <form onSubmit={handleSubmit}>
-          <div className="px-6 flex flex-col gap-4 pb-5">
+        <form onSubmit={handleSubmit} className="flex flex-col flex-1 overflow-hidden">
+          <div className="px-6 flex flex-col gap-4 pb-5 overflow-y-auto flex-1">
             {successMsg && (
               <div
                 className="text-[13px] px-3 py-2 rounded-[7px] font-medium"
@@ -186,7 +185,7 @@ export function EquipmentModal({ equipment: eq, onClose }: Props) {
 
           {/* Footer */}
           <div
-            className="flex justify-end gap-3 px-6 py-4"
+            className="flex justify-end gap-3 px-6 py-4 shrink-0"
             style={{ backgroundColor: '#FBFAF7', borderTop: '1px solid #F0EEE9' }}
           >
             <Button variant="secondary" type="button" onClick={onClose}>

@@ -6,10 +6,7 @@ import { createPersonAction, updatePersonAction } from '@/app/actions/people'
 import { Button } from '@/components/ui/Button'
 import type { Person } from '@/lib/types'
 
-const DEPARTMENTS = [
-  'Construction', 'Survey', 'Engineering', 'Commercial',
-  'Information Technology', 'Administration',
-]
+const DEPARTMENTS = ['Head Office', 'Site']
 
 interface Props {
   person?: Person
